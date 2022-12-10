@@ -42,7 +42,7 @@ const Form = () => {
         console.log('error: '+ error);}
       }
     
-      fetchData('https://scandiweb-backend-production.up.railway.app/skus', setSkus);
+      fetchData('https://test-task-skubidu.000webhostapp.com/skus', setSkus);
     
     }, []);
 
@@ -85,7 +85,7 @@ const Form = () => {
             body: urlencoded,
           };
         try{
-            await fetch('https://scandiweb-backend-production.up.railway.app/', opts)
+            await fetch('https://test-task-skubidu.000webhostapp.com/create', opts)
             }
         catch(error){
             console.log('error:' + error);
