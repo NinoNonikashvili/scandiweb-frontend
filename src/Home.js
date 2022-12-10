@@ -38,7 +38,8 @@ const Home = (props) =>{
           console.log('error: '+ error);}
         }
       
-        fetchData('https://test-task-skubidu.000webhostapp.com/', setProducts);
+        fetchData('https://scandiweb-backend-production.up.railway.app/', setProducts);
+        // fetchData('http://localhost:2020/skus', setSkus);
        
       
       }, [checkedCards]);
@@ -65,7 +66,7 @@ const Home = (props) =>{
         //   const data = JSON.stringify({data: [dataToSend]});
 
         try{
-           await fetch('https://test-task-skubidu.000webhostapp.com/delete', {
+           await fetch('https://scandiweb-backend-production.up.railway.app/delete', {
             method: 'POST',
             body: dataToSend,
             mode: 'cors'
