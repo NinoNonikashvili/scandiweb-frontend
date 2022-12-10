@@ -80,9 +80,12 @@ const Home = (props) =>{
     const handleDeleteClick = ()=>{
         //delete products from db
         deleteDataOnServer(checkedCards);
-        setCheckedCard(()=>{
+        setTimeout(()=>{
+          setCheckedCard(()=>{
             return []
         });
+        }, 1000)
+
     }
     // console.log(props.products);
     // console.log(checkedCards);
