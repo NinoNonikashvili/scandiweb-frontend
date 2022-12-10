@@ -42,7 +42,7 @@ const Form = () => {
         console.log('error: '+ error);}
       }
     
-      fetchData('https://scandiweb-backend-production.up.railway.app/skus', setSkus);
+      fetchData('https://test-task-skubidu.000webhostapp.com/skus', setSkus);
     
     }, []);
 
@@ -81,11 +81,12 @@ const Form = () => {
           const urlencoded = new URLSearchParams(data);
           const opts = {
             method: 'POST',
+            mode: 'cors',
             headers: headers,
             body: urlencoded,
           };
         try{
-            await fetch('https://scandiweb-backend-production.up.railway.app/', opts)
+            await fetch('https://test-task-skubidu.000webhostapp.com/create', opts)
             }
         catch(error){
             console.log('error:' + error);
@@ -94,6 +95,7 @@ const Form = () => {
     }
 
     const onsubmit = (data) =>{
+        console.log(data);
         data.dvd = skus.dvd;
         data.book = skus.book;
         data.furniture = skus.furniture;        
@@ -227,7 +229,7 @@ const Form = () => {
                         type='number'
                         id='weight'
                         placeholder=""
-                        {...register("book", {required: 'required field'})} />
+                        {...register("weight", {required: 'required field'})} />
                         {errors.book && <div className="form-text text-error">{errors.book.message}</div>}
                     </label>
                     <div className="form-text">{hints[2]}</div>

@@ -46,7 +46,7 @@ const AppContainer = () =>{
 // console.log(skus);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/add' element={<AddProduct/>}/>

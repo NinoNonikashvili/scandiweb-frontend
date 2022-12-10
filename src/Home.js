@@ -18,8 +18,8 @@ const Home = (props) =>{
           'id':'1',
           'name': 'sds',
           'price': '232',
-          'descriptionName': 'size',
-          'descriptionNumber': '23'
+          'description_name': 'size',
+          'description_number': '23'
         }]
       );
       
@@ -38,8 +38,7 @@ const Home = (props) =>{
           console.log('error: '+ error);}
         }
       
-        fetchData('https://scandiweb-backend-production.up.railway.app/', setProducts);
-        // fetchData('http://localhost:2020/skus', setSkus);
+        fetchData('https://test-task-skubidu.000webhostapp.com/', setProducts);
        
       
       }, [checkedCards]);
@@ -66,7 +65,7 @@ const Home = (props) =>{
         //   const data = JSON.stringify({data: [dataToSend]});
 
         try{
-           await fetch('https://scandiweb-backend-production.up.railway.app/delete', {
+           await fetch('https://test-task-skubidu.000webhostapp.com/delete', {
             method: 'POST',
             body: dataToSend,
             mode: 'cors'
