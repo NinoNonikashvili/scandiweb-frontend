@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import {json, Link} from 'react-router-dom';
 import Card from './Card';
 import Header from './Header';
 import Footer from './Footer';

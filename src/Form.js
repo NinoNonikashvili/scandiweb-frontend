@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {useForm} from 'react-hook-form'
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const Form = () => {
     const [skus, setSkus] = useState(
@@ -86,11 +86,12 @@ const Form = () => {
             body: urlencoded,
           };
         try{
-            await fetch('https://test-task-skubidu.000webhostapp.com/create', opts)
+            await fetch('https://test-task-skubidu.000webhostapp.com/create', opts);
             }
         catch(error){
             console.log('error:' + error);
         }
+        <Navigate to="/" />
 
     }
 
