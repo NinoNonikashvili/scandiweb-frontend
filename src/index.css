@@ -11,3 +11,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+ form{
+  min-height: 80vh;
+  padding:50px;
+}
+label{
+  display: block;
+}
+.typeSelect{
+  margin-bottom: 50px;
+
+}
+.submit-btn, .cancel-btn{
+  margin-top:20px;
+  width:100px;
+  background-color: #a9847d;
+  border:none;
+}
+.cancel-btn:hover{
+  background-color: white;
+  color:#a9847d;
+}
+.submit-btn{
+  margin-right:10px;
+  background-color: #7da2a9;
+}
+.submit-btn:hover {
+  background-color: white;
+  color:#7da2a9;
+}
+a{
+  text-decoration: none;
+}
+a:hover{
+  color: white;
+}
+.text-error{
+  color: #987670
+}
