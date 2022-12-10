@@ -38,7 +38,7 @@ const Home = (props) =>{
           console.log('error: '+ error);}
         }
       
-        fetchData('http://localhost:2020/', setProducts);
+        fetchData('https://scandiweb-backend-production.up.railway.app/', setProducts);
         // fetchData('http://localhost:2020/skus', setSkus);
        
       
@@ -66,7 +66,7 @@ const Home = (props) =>{
         //   const data = JSON.stringify({data: [dataToSend]});
 
         try{
-           await fetch('http://localhost:2020/delete', {
+           await fetch('https://scandiweb-backend-production.up.railway.app/delete', {
             method: 'POST',
             body: dataToSend,
             mode: 'cors'

@@ -42,7 +42,7 @@ const Form = () => {
         console.log('error: '+ error);}
       }
     
-      fetchData('http://localhost:2020/skus', setSkus);
+      fetchData('https://scandiweb-backend-production.up.railway.app/skus', setSkus);
     
     }, []);
 
@@ -85,7 +85,7 @@ const Form = () => {
             body: urlencoded,
           };
         try{
-            await fetch('http://localhost:2020/create', opts)
+            await fetch('https://scandiweb-backend-production.up.railway.app/', opts)
             }
         catch(error){
             console.log('error:' + error);
