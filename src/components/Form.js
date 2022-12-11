@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {useForm} from 'react-hook-form'
 import { Link, useNavigate } from "react-router-dom";
+import { btnsWrapper } from "../styles/btnWrapper";
 
 const Form = () => {
     const navigate = useNavigate();
@@ -49,7 +50,6 @@ const Form = () => {
 
     const checkSku = (prType, formSku)=>{
         prType = prType ? prType.toLowerCase(): '';
-        // console.log(prType)
         if(formSku!=='' && (prType==='dvd'||prType==='book'||prType==='furniture')){
             if(skus[prType]===''){
                 console.log('update skus with value for this product')
@@ -58,10 +58,6 @@ const Form = () => {
             }
             else{
                 if(skus[prType]!==formSku){
-                // console.log(skus);
-                // console.log(skus[prType]);
-                // console.log(prType);
-                // console.log(skus[prType]!==formSku);
                 console.log('sku already exists')
                 errors.productType = {type: 'skuValidation'}
                 return false
@@ -109,7 +105,7 @@ const Form = () => {
 
     return(
 
-        <form onSubmit={handleSubmit(onsubmit)}>
+        <form onSubmit={handleSubmit(onsubmit)} id='product_form'>
             <div className="mb-3">
             <label className="form-label">SKU</label>
                 <input 
@@ -143,10 +139,9 @@ const Form = () => {
                 <input
                     className="form-control"
                     name='price' 
-                    type='decimal' 
+                    type='number' 
                     id='price' 
                     placeholder='Price'
-                    // style={} 
                     {...register('price', {required: 'required field'})} />   
                     {errors.price && <div className="form-text text-error">{errors.price.message}</div>}              
             
@@ -240,17 +235,19 @@ const Form = () => {
             )
 
             } 
-            <input 
-                type='submit'
-                className="btn btn-primary submit-btn" 
-                value='Save'
-                disabled={
-                    Object.keys(errors).length===0 ? false:true
-                }
-                />
+            <div style={btnsWrapper}>
+                 <input 
+                    type='submit'
+                    className="button red-btn" 
+                    value='Save'
+                    disabled={
+                        Object.keys(errors).length===0 ? false:true
+                    }
+                    />
                 <Link to='/'>
-                    <button className="btn btn-danger cancel-btn">Cancel</button>
+                    <button className="button green-btn">Cancel</button>
                 </Link>
+            </div>
             
         </form>
     

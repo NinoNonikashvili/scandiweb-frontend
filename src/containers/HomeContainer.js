@@ -1,26 +1,10 @@
 import React, {useState, useEffect} from "react";
-import Card from './Card';
-import Header from './Header';
-import Footer from './Footer';
-import { cardsWrapper } from "./styles/cardsWrapper";
+import Home from "../components/Home";
 
-
-const Home = (props) =>{
-/* 1.display header(pass data for btn names and destination as props) and footer
-   2.receive data as props
-   3.map over it, pass to create card component and pass data to it.
-*/
+const HomeContainer = () =>{
     const [checkedCards, setCheckedCard] = useState([]);
     console.log('rendered');
-    const [products, setProducts] = useState(
-        [{
-          'id':'1',
-          'name': 'sds',
-          'price': '232',
-          'description_name': 'size',
-          'description_number': '23'
-        }]
-      );
+    const [products, setProducts] = useState([]);
       
       
       useEffect(()=>{ 
@@ -35,13 +19,11 @@ const Home = (props) =>{
       
         }catch(error){
           console.log('error: '+ error);}
-        }
-      
-        fetchData('https://test-task-skubidu.000webhostapp.com/', setProducts);
-        // fetchData('http://localhost:2020/skus', setSkus);
-       
+        }     
+        fetchData('https://test-task-skubidu.000webhostapp.com/', setProducts);       
       
       }, [checkedCards]);
+
     const handleCardClick = (id, state)=>{
         console.log('triggered checkboxClick', id, state)
         if(state){
@@ -61,9 +43,6 @@ const Home = (props) =>{
 
     }
     const deleteDataOnServer = async(dataToSend) =>{
-
-        //   const data = JSON.stringify({data: [dataToSend]});
-
         try{
            await fetch('https://test-task-skubidu.000webhostapp.com/delete', {
             method: 'POST',
@@ -87,20 +66,7 @@ const Home = (props) =>{
         }, 1000)
 
     }
-    // console.log(props.products);
-    // console.log(checkedCards);
-
-    return (
-        <>
-            <Header h1={'Product List'} btn1={{name:'ADD', destination: '/add', onClick:''}} btn2={{name:'MASS DELETE', destination:'', onClick: handleDeleteClick }}  />
-            <div className="cardsWrapper" style={cardsWrapper}>
-                {products.map((product) =>{
-                  return  <Card product={product} onClick={handleCardClick} />
-                })}
-            </div>
-            <Footer />
-        </>
-    )
+    return <Home products = {products} handleCardClick = {handleCardClick} handleDeleteClick = {handleDeleteClick}/>
 }
 
-export default Home
+export default HomeContainer;

@@ -22,24 +22,31 @@ label{
   margin-bottom: 50px;
 
 }
-.submit-btn, .cancel-btn{
-  margin-top:20px;
-  width:100px;
-  background-color: #a9847d;
-  border:none;
+
+.button{
+  width:130px;
+  font-weight:  600;
+  border: none;
+  padding: 10px;
+  border-radius:  5px;
+  color:#fff;
 }
-.cancel-btn:hover{
-  background-color: white;
-  color:#a9847d;
-}
-.submit-btn{
-  margin-right:10px;
+.green-btn{
   background-color: #7da2a9;
 }
-.submit-btn:hover {
+.green-btn:hover{
   background-color: white;
   color:#7da2a9;
 }
+.red-btn{
+  background-color:#a9847d;
+}
+.red-btn:hover{
+  background-color: white;
+  color:#a9847d;
+}
+
+
 a{
   text-decoration: none;
 }

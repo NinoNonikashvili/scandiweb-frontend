@@ -1,4 +1,3 @@
-import { findByLabelText } from "@testing-library/react";
 
 export const headerFooterStyles = {
     boxSizing: 'borderBox',
@@ -10,17 +9,8 @@ export const headerFooterStyles = {
     padding: '30px',
     textAlign: 'center'
 }
-export const btnsWrapper = {
-    display:'flex',
-    justifyContent:'center',
-    gap:'10px',
-    margin: '0 auto'
-}
-export const button = {
-    width:'140px',
-    backgroundColor:'#cbd9dc',
-    fontWeight: '600'
-}
+
+
 export const h1={
     textAlign:'center'
 }

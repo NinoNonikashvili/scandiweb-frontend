@@ -1,11 +1,9 @@
 import React from "react";
 import Header from './Header';
 import Footer from './Footer';
-import Form from './Form';
+import Form from './components/Form';
 
 const AddProduct = () =>{
-
-
     return (
         <>
             <Header h1={'Add Product'} />
