@@ -11,7 +11,7 @@ const AppContainer = () =>{
 
   return (
     // basename={process.env.PUBLIC_URL} add before push
-    <BrowserRouter >
+    <BrowserRouter basename={process.env.PUBLIC_URL} >
       <Routes>
           <Route path='/' element={<HomeContainer/>} />
           <Route path='/add' element={<AddProduct/>}/>
