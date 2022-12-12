@@ -5,13 +5,7 @@ import { btnsWrapper } from "../styles/btnWrapper";
 
 const Form = () => {
     const navigate = useNavigate();
-    const [skus, setSkus] = useState(
-        {
-        dvd: '123abc',
-        book: '',
-        furniture: ''
-      }
-      );
+    const [skus, setSkus] = useState({});
       const {register, formState:{errors}, handleSubmit, watch, getValues, trigger} = useForm({
         mode: 'all'
     });
@@ -50,10 +44,11 @@ const Form = () => {
 
     const checkSku = (prType, formSku)=>{
         prType = prType ? prType.toLowerCase(): '';
+        console.log(skus);
         if(formSku!=='' && (prType==='dvd'||prType==='book'||prType==='furniture')){
+            console.log(skus[prType]);
             if(skus[prType]===''){
                 console.log('update skus with value for this product')
-                setSkus(formSku)
                 return true
             }
             else{
@@ -68,8 +63,9 @@ const Form = () => {
 
         }
         console.log(errors);
+        console.log(skus);
+
     }
-    console.log(checkSku(prodType, userSku));
 
     const postDataOnServer = async(data) =>{
         const headers = new Headers({
@@ -94,9 +90,28 @@ const Form = () => {
 
     const onsubmit = (data) =>{
         console.log(data);
-        data.dvd = skus.dvd;
-        data.book = skus.book;
-        data.furniture = skus.furniture;        
+        console.log(data.productType.toLowerCase())
+        switch(data.productType.toLowerCase()){
+            case 'dvd':
+                console.log('dvd')
+                data.dvd = data.SKU;
+                data.book = skus.book;
+                data.furniture = skus.furniture;
+                break;
+            case 'book':
+                console.log('book')
+                data.dvd = skus.dvd;
+                data.book = data.SKU;
+                data.furniture = skus.furniture;
+                break;
+            case 'furniture':
+                console.log('furniture')
+                data.dvd = skus.dvd;
+                data.book = data.furniture;
+                data.furniture = data.SKU;
+                break;
+        }
+        
         console.log(data);
         postDataOnServer(data);
  
