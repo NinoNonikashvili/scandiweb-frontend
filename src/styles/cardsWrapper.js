@@ -8,7 +8,7 @@ export const cardsWrapper = {
 }
 
 export const card = {
-    minWidth: '200px',
+    maxWidth: '350px',
     padding: '25px',
     maxHeight:'200px',
     borderRadius: '8px',
