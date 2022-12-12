@@ -20,7 +20,6 @@ its unique SKU code. by default the SKU code for dvd type is 123abc (for checkin
         style="margin-right:3%"
         align="top"
       />
-
       <img
         src="https://user-images.githubusercontent.com/61002720/207044624-45d130bd-e4de-4e9b-bbd8-2bbde8fad803.png"
         width="30%"
