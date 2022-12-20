@@ -23,7 +23,7 @@ const Home = (props) =>{
             </div>
             <div style={cardsWrapper}>
                 {props.products.map((product) =>{
-                  return  <Card product={product} onClick={props.handleCardClick} />
+                  return  <Card key={product.id} product={product} onClick={props.handleCardClick} />
                 })}
             </div>
             <Footer />

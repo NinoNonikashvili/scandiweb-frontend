@@ -5,16 +5,14 @@ import { btnsWrapper } from "../styles/btnWrapper";
 
 const Form = () => {
     const navigate = useNavigate();
-    const [skus, setSkus] = useState({});
-      const {register, formState:{errors}, handleSubmit, watch, getValues, trigger} = useForm({
+    const [skus, setSkus] = useState({dvd: '', book: '', furniture: ''});
+    const [products, setProducts] = useState([]);
+    const {register, formState:{errors}, handleSubmit, watch, getValues, trigger} = useForm({
         mode: 'all'
     });
     const prodType = watch('productType');
     const userSku = watch('SKU');
  
-
-
-
 
     const hints= [
         'Please, provide dimension in Mb',
@@ -22,25 +20,54 @@ const Form = () => {
         'Please, provide dimension in Kg'
     ]
 
-
-    
     useEffect(()=>{ 
-      const fetchData = async (endpoint, setter)=>{
-        try{
-          const response = await fetch(endpoint,
-          {
-            mode: 'cors'
-          });
-          const fetchedData = await response.json();
-          setter(fetchedData[0]);
-    
-      }catch(error){
-        console.log('error: '+ error);}
-      }
-    
-      fetchData('https://test-task-skubidu.000webhostapp.com/skus', setSkus);
-    
-    }, []);
+        const fetchData = async (endpoint, setter)=>{
+          try{
+            const response = await fetch(endpoint,
+            {
+              mode: 'cors'
+            });
+            const fetchedData = await response.json();
+            setter(fetchedData);
+      
+        }catch(error){
+          console.log('error: '+ error);}
+        }     
+        fetchData('https://test-task-skubidu.000webhostapp.com/', setProducts);       
+      }, []);
+
+      useEffect(()=>{
+        let dvdSku = products.find((product) =>{
+          return product.unit==='Mb'
+        })
+        let bookSku = products.find((product)=>{
+          return product.unit === 'Kg'
+        })
+        let furnitureSku = products.find((product)=>{
+          return product.unit === 'Cm'
+        })
+  
+        if(dvdSku){
+          setSkus((prevState)=>({
+            ...prevState,
+            dvd: dvdSku.sku
+          }))
+        }
+        if(bookSku){
+          setSkus((prevState)=>({
+            ...prevState,
+            book: bookSku.sku
+          }))
+        }
+        if(furnitureSku){
+          setSkus((prevState)=>({
+            ...prevState,
+            furniture: furnitureSku.sku
+          }))
+        }
+      }, [products])
+
+
 
     const checkSku = (prType, formSku)=>{
         prType = prType ? prType.toLowerCase(): '';
@@ -52,20 +79,19 @@ const Form = () => {
                 return true
             }
             else{
+                console.log('values: '+skus[prType], formSku )
                 if(skus[prType]!==formSku){
-                console.log('sku already exists')
-                errors.productType = {type: 'skuValidation'}
-                return false
+                    console.log('sku already exists')
+                    return false
                 }else{
                     return true
                 }
             }
 
         }
-        console.log(errors);
-        console.log(skus);
 
     }
+
 
     const postDataOnServer = async(data) =>{
         const headers = new Headers({
@@ -89,32 +115,7 @@ const Form = () => {
     }
 
     const onsubmit = (data) =>{
-        console.log(data);
-        console.log(data.productType.toLowerCase())
-        switch(data.productType.toLowerCase()){
-            case 'dvd':
-                console.log('dvd')
-                data.dvd = data.SKU;
-                data.book = skus.book;
-                data.furniture = skus.furniture;
-                break;
-            case 'book':
-                console.log('book')
-                data.dvd = skus.dvd;
-                data.book = data.SKU;
-                data.furniture = skus.furniture;
-                break;
-            case 'furniture':
-                console.log('furniture')
-                data.dvd = skus.dvd;
-                data.book = data.furniture;
-                data.furniture = data.SKU;
-                break;
-        }
-        
-        console.log(data);
         postDataOnServer(data);
- 
     }
 
 
@@ -162,15 +163,14 @@ const Form = () => {
             
             </div>
             <select className="form-select typeSelect" id='productType' {...register('productType', {validate: {
-               typeValidation: value => value==='DVD'||value==='Book'||value==='Furniture',
-               skuValidation: () => {checkSku(prodType, userSku)}}})}>
+               typeValidation: (value) => (value==='DVD'||value==='Book'||value==='Furniture'),
+               skuValidation: () => (checkSku(prodType, userSku))}})}>
                 <option disabled={true} selected={true} hidden={true}>choose product type</option>
                 <option value='DVD'>DVD</option>
                 <option value='Book'>Book</option>
                 <option value='Furniture'>Furniture</option>
             </select>
             
-            {console.log(errors.productType)}
             {errors.productType && errors.productType.type==='typeValidation' && <div className="form-text text-error">{'choose type'}</div>}
             {errors.productType && errors.productType.type==='skuValidation' && <div className="form-text text-error">{'SKU already exists for this product'}</div>}
             { watch('productType')==='DVD' && (
